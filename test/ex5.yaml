@@ -1,0 +1,6 @@
+# this is a comment
+foo: bar
+# this is a comment for a list
+bar: [ baz, quux ]
+# this is a comment for a map
+baz: { foo: bar, baz: quux }

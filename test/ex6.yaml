@@ -1,0 +1,9 @@
+foo:
+    # a comment
+    - bar
+    # another comment
+    - baz
+bar:    # map comment
+    bar: baz
+    # a comment
+    quux: gzonk
