@@ -20,7 +20,7 @@ class TestInvalidYaml < Test::Unit::TestCase
     end
     def test_missingfile
         cfg = OurConfig.instance( 'test/nonexistent.yaml' )
-        assert_instance_of(ActiveSupport::HashWithIndifferentAccess, cfg)
+        assert_instance_of(OurConfig, cfg)
     end
     def test_missingfile_off
         OurConfig.skipmissing = false
@@ -31,6 +31,6 @@ class TestInvalidYaml < Test::Unit::TestCase
     def test_skipbad_on
         OurConfig.skipbad = true
         cfg = OurConfig.instance( 'test/exbad2.yaml' )
-        assert_instance_of(ActiveSupport::HashWithIndifferentAccess, cfg)
+        assert_instance_of(OurConfig, cfg)
     end
 end

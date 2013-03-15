@@ -46,8 +46,14 @@ Files that are missing are skipped by default.  Files that are bad (i.e. do not 
 an exception to be thrown.  This behaviour can be overridden with #skipbad= and #skipmissing= before
 calling #instance the first time.
 
-The hash which is returned is a ActiveSupport::HashWithIndifferentAccess, so you can get at the keys as
-strings or symbols as you prefer
+The type of the returned object is your subordinate class, but [] and []= are delegated to the contained
+hash, which is an ActiveSupport::HashWithIndifferentAccess.  This means you can use strings or symbols
+interchangeably to access elements of the hash.
+
+Adding Layers after Instance Construction
+-----------------------------------------
+
+Using .add, you can add one or more layers that are deep merged into the existing config.
 
 Contributing to LayeredYAMLConfig
 ---------------------------------

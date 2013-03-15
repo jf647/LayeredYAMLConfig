@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
     s.name = 'layeredyamlconfig'
-    s.version = '1.0.0'
+    s.version = '1.1.0'
     s.date = '2013-03-15'
     s.summary = 'YAML Configs with multiple layers'
     s.description = 'Read config from multiple YAML files',
