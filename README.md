@@ -43,8 +43,8 @@ that can only be constructed the first time #instance is called.  Pass one or mo
 will be read and deep merged on top of each other in left-to-right order.
 
 Files that are missing are skipped by default.  Files that are bad (i.e. do not parse as valid YAML) cause
-an exception to be thrown.  This behaviour can be overridden with #skipbad= and #skipmissing= before calling
-#instance the first time.
+an exception to be thrown.  This behaviour can be overridden with #skipbad= and #skipmissing= before
+calling #instance the first time.
 
 The hash which is returned is a ActiveSupport::HashWithIndifferentAccess, so you can get at the keys as
 strings or symbols as you prefer
