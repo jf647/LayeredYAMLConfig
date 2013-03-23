@@ -1,6 +1,5 @@
 require 'yaml'
 require 'forwardable'
-require 'pathname'
 require 'hash_deep_merge'
 require 'active_support/core_ext/hash/indifferent_access'
 
@@ -58,6 +57,7 @@ class LayeredYAMLConfig
 
         # due to the multi passing of splat args, we can get Array-in-Array situations here
         files.flatten.each do |fn|
+            @files.push(fn)
             if ! File.exists?(fn)
                 next if @@skipmissing[self.class]
                 raise ArgumentError, "file #{fn} does not exist"
@@ -67,7 +67,6 @@ class LayeredYAMLConfig
                 if ! data.instance_of?(Hash)
                     raise ArgumentError, "file #{fn} does not contain a Hash"
                 end
-                @files.push(Pathname.new(fn).realpath)
                 @cfg.deep_merge!(data.symbolize_keys)
             rescue
                 if ! @@skipbad[self.class]
