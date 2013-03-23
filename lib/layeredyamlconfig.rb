@@ -1,5 +1,6 @@
 require 'yaml'
 require 'forwardable'
+require 'pathname'
 require 'hash_deep_merge'
 require 'active_support/core_ext/hash/indifferent_access'
 
@@ -8,6 +9,7 @@ class LayeredYAMLConfig
     extend Forwardable
 
     private_class_method :new
+    attr_reader :files
     def_delegators :@cfg, :[], :[]=
 
     # catalog of per-subclass instances
@@ -54,24 +56,22 @@ class LayeredYAMLConfig
     
     def add(*files)
 
-        # due to the multi passing of splat args, we can get Array-in-Arry situations here
+        # due to the multi passing of splat args, we can get Array-in-Array situations here
         files.flatten.each do |fn|
-            # attempt to load each file using YAML
-            files.flatten.each do |fn|
-                if ! File.exists?(fn)
-                    next if @@skipmissing[self.class]
-                    raise ArgumentError, "file #{fn} does not exist"
+            if ! File.exists?(fn)
+                next if @@skipmissing[self.class]
+                raise ArgumentError, "file #{fn} does not exist"
+            end
+            begin
+                data = YAML.load(File.open(fn))
+                if ! data.instance_of?(Hash)
+                    raise ArgumentError, "file #{fn} does not contain a Hash"
                 end
-                begin
-                    data = YAML.load(File.open(fn))
-                    if ! data.instance_of?(Hash)
-                        raise ArgumentError, "file #{fn} does not contain a Hash"
-                    end
-                    @cfg.deep_merge!(data.symbolize_keys)
-                rescue
-                    if ! @@skipbad[self.class]
-                        raise
-                    end
+                @files.push(Pathname.new(fn).realpath)
+                @cfg.deep_merge!(data.symbolize_keys)
+            rescue
+                if ! @@skipbad[self.class]
+                    raise
                 end
             end
         end
@@ -81,6 +81,7 @@ class LayeredYAMLConfig
     def initialize(*files)
 
         @cfg = Hash.new.with_indifferent_access
+        @files = []
         add(files)
 
     end
