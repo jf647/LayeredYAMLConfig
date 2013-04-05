@@ -9,7 +9,7 @@ class LayeredYAMLConfig
 
     private_class_method :new
     attr_reader :files
-    def_delegators :@cfg, :[], :[]=
+    def_delegators :@cfg, :[], :[]=, :to_hash
 
     # catalog of per-subclass instances
     @@instances = Hash.new

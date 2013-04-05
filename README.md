@@ -55,6 +55,11 @@ Adding Layers after Instance Construction
 
 Using .add, you can add one or more layers that are deep merged into the existing config.
 
+Converting to a Hash
+--------------------
+
+#to_hash returns a symbolized hash representation of the configuration object
+
 Contributing to LayeredYAMLConfig
 ---------------------------------
  
