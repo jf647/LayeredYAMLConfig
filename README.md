@@ -4,7 +4,7 @@ LayeredYAMLConfig
 Overview
 --------
 
-Ruby configuration library that layered multiple YAML files on top of each other
+Ruby configuration library that layers multiple YAML files on top of each other
 
 Synopsis
 --------
@@ -58,7 +58,7 @@ Using .add, you can add one or more layers that are deep merged into the existin
 Converting to a Hash
 --------------------
 
-#to_hash returns a symbolized hash representation of the configuration object
+to_hash returns a symbolized hash representation of the configuration object
 
 Contributing to LayeredYAMLConfig
 ---------------------------------
