@@ -1,5 +1,9 @@
 # LayeredYAMLConfig Change History
 
+# 1.4.1
+
+* replace dependency on 'erbuis' (ERB's sophisticated European cousin) with 'erubis'
+
 # 1.4.0
 
 * added ::reset and ::reset_all methods to reset per-class options to their default
