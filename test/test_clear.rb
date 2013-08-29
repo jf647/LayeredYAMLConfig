@@ -1,4 +1,4 @@
-require 'test/unit'
+require 'minitest/autorun'
 require 'layeredyamlconfig'
 
 class OurConfig1 < LayeredYAMLConfig
@@ -7,9 +7,10 @@ end
 class OurConfig2 < LayeredYAMLConfig
 end
 
-class TestClear < Test::Unit::TestCase
+class TestClear < MiniTest::Unit::TestCase
     def setup
         LayeredYAMLConfig.clear_all
+        LayeredYAMLConfig.reset_all
     end
     def test_clear_oneclass
         c1 = OurConfig1.instance( 'test/ex1.yaml' )

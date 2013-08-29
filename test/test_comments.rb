@@ -1,12 +1,13 @@
-require 'test/unit'
+require 'minitest/autorun'
 require 'layeredyamlconfig'
 
 class OurConfig < LayeredYAMLConfig
 end
 
-class TestComments < Test::Unit::TestCase
+class TestComments < MiniTest::Unit::TestCase
     def setup
         LayeredYAMLConfig.clear_all
+        LayeredYAMLConfig.reset_all
     end
     def test_file_with_comments
         c = OurConfig.instance( 'test/ex5.yaml' )

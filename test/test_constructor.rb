@@ -1,12 +1,13 @@
-require 'test/unit'
+require 'minitest/autorun'
 require 'layeredyamlconfig'
 
 class OurConfig < LayeredYAMLConfig
 end
 
-class TestConstructor < Test::Unit::TestCase
+class TestConstructor < MiniTest::Unit::TestCase
     def setup
         OurConfig.clear
+        OurConfig.reset
     end
     def test_nofiles
         assert_raises(ArgumentError) {
