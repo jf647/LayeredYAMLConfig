@@ -11,15 +11,6 @@ class LayeredYAMLConfig
     attr_reader :files
     def_delegators :@cfg, :[], :[]=, :to_hash
 
-    # catalog of per-subclass instances
-    @@instances = Hash.new
-    
-    # catalog of per-subclass options
-    @@skipbad = Hash.new
-    @@skipbad.default = false
-    @@skipmissing = Hash.new
-    @@skipmissing.default = true
-
     def self.instance(*files)
 
         if @@instances[self].nil?
@@ -44,13 +35,41 @@ class LayeredYAMLConfig
     def self.clear_all
         @@instances = Hash.new
     end
+
+    def self.reset
+        @@skipbad.delete(self)
+        @@skipmissing.delete(self)
+        @@templates.delete(self)
+    end
+
+    def self.reset_all
+        @@skipbad = Hash.new(false)
+        @@skipmissing = Hash.new(true)
+        @@templates = Hash.new(false)
+    end
+    
+    def self.skipbad
+        @@skipbad[self]
+    end
+    
+    def self.skipmissing
+        @@skipmissing[self]
+    end
+
+    def self.templates
+        @@templates[self]
+    end
     
     def self.skipbad=(newval)
-        @@skipbad[self] = newval
+        @@skipbad[self] = !!newval
     end
 
     def self.skipmissing=(newval)
-        @@skipmissing[self] = newval
+        @@skipmissing[self] = !!newval
+    end
+
+    def self.templates=(newval)
+        @@templates[self] = !!newval
     end
     
     def add(*files)
@@ -59,7 +78,7 @@ class LayeredYAMLConfig
         files.flatten.each do |fn|
             @files.push(fn)
             if ! File.exists?(fn)
-                next if @@skipmissing[self.class]
+                next if self.class.skipmissing
                 raise ArgumentError, "file #{fn} does not exist"
             end
             begin
@@ -69,7 +88,7 @@ class LayeredYAMLConfig
                 end
                 @cfg.deep_merge!(data.symbolize_keys)
             rescue
-                if ! @@skipbad[self.class]
+                if ! self.class.skipbad
                     raise
                 end
             end
@@ -84,5 +103,9 @@ class LayeredYAMLConfig
         add(files)
 
     end
+    
+    # create catalog of per-subclass instances and options
+    self.clear_all
+    self.reset_all
 
 end

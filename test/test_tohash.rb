@@ -1,12 +1,13 @@
-require 'test/unit'
+require 'minitest/autorun'
 require 'layeredyamlconfig'
 
 class OurConfig < LayeredYAMLConfig
 end
 
-class TestToHash < Test::Unit::TestCase
+class TestToHash < MiniTest::Unit::TestCase
     def setup
         OurConfig.clear
+        OurConfig.reset
     end
     def test_tohash
         c = OurConfig.instance( 'test/ex1.yaml' )

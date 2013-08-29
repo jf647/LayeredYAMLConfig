@@ -1,4 +1,4 @@
-require 'test/unit'
+require 'minitest/autorun'
 require 'layeredyamlconfig'
 
 class OurConfig1 < LayeredYAMLConfig
@@ -7,9 +7,10 @@ end
 class OurConfig2 < LayeredYAMLConfig
 end
 
-class TestMulti < Test::Unit::TestCase
+class TestMulti < MiniTest::Unit::TestCase
     def setup
         LayeredYAMLConfig.clear_all
+        LayeredYAMLConfig.reset_all
     end
     def test_construct_two_from_same_file
         c1 = OurConfig1.instance( 'test/ex1.yaml' )
@@ -17,8 +18,8 @@ class TestMulti < Test::Unit::TestCase
         assert_instance_of(OurConfig1, c1)
         assert_instance_of(OurConfig2, c2)
         assert_equal('bar', c1[:foo])
-        assert_equal('bar', c1['foo'])
-        assert_equal('bar', c2[:foo])
+        assert_equal('bar', c2['foo'])
+        assert_equal('bar', c1[:foo])
         assert_equal('bar', c2['foo'])
     end
     def test_construct_two_from_diff_files
@@ -27,8 +28,8 @@ class TestMulti < Test::Unit::TestCase
         assert_instance_of(OurConfig1, c1)
         assert_instance_of(OurConfig2, c2)
         assert_equal('bar', c1[:foo])
-        assert_equal('bar', c1['foo'])
         assert_equal('baz', c2[:bar])
+        assert_equal('bar', c1['foo'])
         assert_equal('baz', c2['bar'])
         refute_equal(c1, c2)
     end

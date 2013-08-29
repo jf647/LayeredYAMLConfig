@@ -1,13 +1,14 @@
-require 'test/unit'
+require 'minitest/autorun'
 require 'pathname'
 require 'layeredyamlconfig'
 
 class OurConfig < LayeredYAMLConfig
 end
 
-class TestFiles < Test::Unit::TestCase
+class TestFiles < MiniTest::Unit::TestCase
     def setup
         OurConfig.clear
+        OurConfig.reset
     end
     def test_files
         c = OurConfig.instance( 'test/ex1.yaml', 'test/ex3.yaml', 'test/ex4.yaml' )
