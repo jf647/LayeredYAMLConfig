@@ -1,4 +1,4 @@
 ---
 foo:
     bar:
-        baz: <%= cfg[:foo][:bar][:quux] %>
+        baz: <%= @cfg[:foo][:bar][:quux] %>
