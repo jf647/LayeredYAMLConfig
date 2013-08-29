@@ -1,5 +1,9 @@
 # LayeredYAMLConfig Change History
 
+# 1.4.2
+
+* remove soft breakpoints.  I make this mistake so often I wrote a Perl test module to catch them: https://metacpan.org/release/Test-NoBreakpoints.  Time for a Ruby version methinks.
+
 # 1.4.1
 
 * replace dependency on 'erbuis' (ERB's sophisticated European cousin) with 'erubis'

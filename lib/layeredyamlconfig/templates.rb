@@ -1,8 +1,6 @@
 require 'layeredyamlconfig/array_traverse.rb'
 require 'layeredyamlconfig/hash_traverse.rb'
 
-require 'debugger'
-
 class LayeredYAMLConfig
 
     def resolve_templates
@@ -23,7 +21,6 @@ class LayeredYAMLConfig
         while true do
             success = 0
             failure = 0
-            #debugger
             newcfg = @cfg.traverse do |v|
                 if v.kind_of?(String) and v.match(/^<%=/)
                     begin
