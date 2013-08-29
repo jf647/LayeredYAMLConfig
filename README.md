@@ -66,11 +66,11 @@ symbols interchangeably to access elements of the hash.
 
 ## Adding Layers after Instance Construction
 
-Using .add, you can add one or more layers that are deep merged into the existing config.
+Using #add, you can add one or more layers that are deep merged into the existing config.
 
 ## Converting to a Hash
 
-to_hash returns a symbolized hash representation of the configuration object
+Call #to_hash to return a symbolized hash representation of the configuration object
 
 ## ERB Templates
 
