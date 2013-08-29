@@ -1,12 +1,13 @@
-require 'test/unit'
+require 'minitest/autorun'
 require 'layeredyamlconfig'
 
 class OurConfig < LayeredYAMLConfig
 end
 
-class TestDeepMerge < Test::Unit::TestCase
+class TestDeepMerge < MiniTest::Unit::TestCase
     def setup
         LayeredYAMLConfig.clear_all
+        LayeredYAMLConfig.reset_all
     end
     def test_deep_merge
         c = OurConfig.instance( 'test/ex7.yaml', 'test/ex8.yaml' )
