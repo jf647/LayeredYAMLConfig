@@ -1,3 +1,4 @@
+require 'minitest_helper'
 require 'minitest/autorun'
 require 'pathname'
 require 'layeredyamlconfig'
@@ -5,7 +6,7 @@ require 'layeredyamlconfig'
 class OurConfig < LayeredYAMLConfig
 end
 
-class TestFiles < MiniTest::Unit::TestCase
+class TestFiles < Minitest::Test
     def setup
         OurConfig.clear
         OurConfig.reset

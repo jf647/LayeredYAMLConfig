@@ -1,10 +1,28 @@
 # LayeredYAMLConfig
 
-## Overview
+home :: https://github.com/jf647/LayeredYAMLConfig
 
-Ruby configuration library that layers multiple YAML files on top of each other.
+## SUMMARY:
 
-Optionally, leaf nodes can be evaluated using as ERB templates, feeding the configuration into itself.
+Ruby configuration library that layers multiple YAML files on top of each
+other with ERB evalution.
+
+## DESCRIPTION:
+
+LayeredYAMLConfig provides a simple config file that supports multiple
+layers.  Values in the right or uppermost layers override values in lower
+layers.  This makes it easy to share configuration without duplication while
+still allowing what needs to be different to vary.
+
+For example:
+
+    program.default.conf
+    program.server_foo.conf
+    program.site_bar.conf
+    program.conf
+
+Optionally, leaf nodes can be evaluated using as ERB templates, feeding the
+configuration into itself.
 
 ## Synopsis
 
@@ -66,11 +84,13 @@ symbols interchangeably to access elements of the hash.
 
 ## Adding Layers after Instance Construction
 
-Using #add, you can add one or more layers that are deep merged into the existing config.
+Using #add, you can add one or more layers that are deep merged into the
+existing config.
 
 ## Converting to a Hash
 
-Call #to_hash to return a symbolized hash representation of the configuration object
+Call #to_hash to return a symbolized hash representation of the
+configuration object
 
 ## ERB Templates
 
@@ -151,11 +171,70 @@ a:
 In the default mode, neither template resolves successfully.  With ::emptyok
 enabled, cfg[:a][:b][:e] becomes the empty string.
 
+### What can be expanded
+
+The result of an Erubis expansion is always a string.  Therefore, you can't
+expand a Hash or Array and then expect it to dereference properly.  This,
+for example, won't work:
+
+```text
+a:
+    one: 1
+    two: 2
+    three: 3
+b: <%= @cfg[:a] %>
+```
+
+```ruby
+puts cfg[:b][:one]
+```
+
+The expansion of cfg[:b] isn't the same as cfg[:a], it's the same as
+cfg[:a].to_s.
+
+You can however dereference through a Hash or Array to a scalar leaf:
+
+```text
+a:
+    one: 1
+    two: 2
+    three: 3
+b: <%= @cfg[:a][:one] %>
+```
+
+```ruby
+puts cfg[:b]
+```
+
 ## Resetting Per-Class Options
 
 call ::reset on your class to reset the ::skipbad, ::skipmissing,
 ::templates and ::emptyok settings to their defaults.  Call ::reset_all on
 the base class to reset these options to default for all derived classes.
+
+## LICENSE:
+
+The MIT License (MIT)
+
+Copyright (c) 2012, 2013 James FitzGibbon <james@nadt.net>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to
+deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+IN THE SOFTWARE.
 
 ## Contributing to LayeredYAMLConfig
  

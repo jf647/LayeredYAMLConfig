@@ -5,19 +5,17 @@ require 'layeredyamlconfig'
 class OurConfig < LayeredYAMLConfig
 end
 
-class TestErbEmpty < Minitest::Test
+class TestErbHash < Minitest::Test
     def setup
         OurConfig.clear
         OurConfig.reset
     end
-    def test_erb_empty
+    def test_erb_hash_of_hash
         OurConfig.templates = true
-        assert_raises(RuntimeError) {
-            OurConfig.instance 'test/ex17.yaml'
-        }
-        OurConfig.emptyok = true
-        c = OurConfig.instance 'test/ex17.yaml'
+        c = OurConfig.instance 'test/ex18.yaml'
         assert_instance_of(OurConfig, c)
-        assert_empty c[:a][:b][:e]
+        assert_equal '1', c[:b][:one][:a]
+        assert_equal '2', c[:b][:two][:b]
+        assert_equal '3', c[:b][:three][:c]
     end
 end

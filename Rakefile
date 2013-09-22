@@ -1,11 +1,18 @@
-require 'rake'
 require 'rake/testtask'
+require 'hoe'
 
-task :default => [:test_units]
+Hoe.spec 'layeredyamlconfig' do
+    developer("James FitzGibbon", "james@nadt.net")
+    license "MIT"
+end
+
+task :default => [:unit_tests]
 
 desc "Run basic tests"
-Rake::TestTask.new("test_units") { |t|
-  t.pattern = 'test/test_*.rb'
-  t.verbose = true
-  t.warning = true
+Rake::TestTask.new("unit_tests") { |t|
+    t.libs.push 'lib'
+    t.libs.push 'test'
+    t.pattern = 'test/test_*.rb'
+    t.verbose = true
+    t.warning = true
 }

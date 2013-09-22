@@ -1,31 +1,31 @@
 # LayeredYAMLConfig Change History
 
-# 1.4.2
+## 1.4.2
 
 * remove soft breakpoints.  I make this mistake so often I wrote a Perl test module to catch them: https://metacpan.org/release/Test-NoBreakpoints.  Time for a Ruby version methinks.
 
-# 1.4.1
+## 1.4.1
 
 * replace dependency on 'erbuis' (ERB's sophisticated European cousin) with 'erubis'
 
-# 1.4.0
+## 1.4.0
 
 * added ::reset and ::reset_all methods to reset per-class options to their default
 * added ERB Template evaluation of leaf nodes
 
-# 1.3.0
+## 1.3.0
 
 * Added #to_hash
 
-# 1.2.0
+## 1.2.0
 
 * added #files read accessor to get a list of files the config was constructed from
 
-# 1.1.0
+## 1.1.0
 
 * Changes to symbolized keys
 * We now return an object of our class and delegate key lookup to the underlying hash
 
-# 1.0.0
+## 1.0.0
 
 * Initial Release

@@ -1,10 +1,11 @@
+require 'minitest_helper'
 require 'minitest/autorun'
 require 'layeredyamlconfig'
 
 class OurConfig < LayeredYAMLConfig
 end
 
-class TestComments < MiniTest::Unit::TestCase
+class TestComments < Minitest::Test
     def setup
         LayeredYAMLConfig.clear_all
         LayeredYAMLConfig.reset_all
