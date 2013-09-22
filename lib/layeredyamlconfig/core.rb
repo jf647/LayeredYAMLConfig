@@ -5,7 +5,7 @@ require 'active_support/core_ext/hash/indifferent_access'
 
 class LayeredYAMLConfig
 
-    VERSION = '1.4.2'
+    VERSION = '1.4.3'
 
     extend Forwardable
 
