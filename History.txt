@@ -1,5 +1,9 @@
 # LayeredYAMLConfig Change History
 
+## 1.4.4
+
+* fix depends by declaring everything properly in the Hoe spec and letting the gemspec and Gemfile be automatically generated
+
 ## 1.4.3
 
 * first release on rubygems.org
