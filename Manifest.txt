@@ -3,10 +3,12 @@ Manifest.txt
 README.txt
 LICENSE.txt
 Rakefile
+Gemfile
 layeredyamlconfig.gemspec
 lib/layeredyamlconfig.rb
 lib/layeredyamlconfig/array_traverse.rb
 lib/layeredyamlconfig/core.rb
+lib/layeredyamlconfig/version.rb
 lib/layeredyamlconfig/hash_traverse.rb
 lib/layeredyamlconfig/templates.rb
 test/minitest_helper.rb

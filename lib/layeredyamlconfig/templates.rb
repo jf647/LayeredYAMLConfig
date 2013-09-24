@@ -1,6 +1,3 @@
-require 'layeredyamlconfig/array_traverse.rb'
-require 'layeredyamlconfig/hash_traverse.rb'
-
 class LayeredYAMLConfig
 
     def resolve_templates
