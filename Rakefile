@@ -36,14 +36,6 @@ task :coverage_env do
   ENV['COVERAGE'] = 'true'
 end
 
-Rake::TestTask.new('test') do |t|
-  t.libs.push 'lib'
-  t.libs.push 'test'
-  t.pattern = 'test/test_*.rb'
-  t.verbose = true
-  t.warning = false
-end
-
 RuboCop::RakeTask.new(:style) do |task|
   task.patterns = ['Rakefile', 'lib/**/*.rb', 'test/**/*.rb']
   task.fail_on_error = true if ENV['CI_BUILD']

@@ -25,7 +25,7 @@ class TestErbArray < Minitest::Test
     c = OurConfig.instance 'test/ex18.yaml'
     assert_instance_of(OurConfig, c)
     assert_equal '1', c[:c][0][0]
-    assert_equal '2', c[:c][0][3]
+    assert_equal '2', c[:c][0][1]
     assert_equal '3', c[:c][0][2]
     assert_equal '1', c[:c][1][0]
     assert_equal '2', c[:c][1][1]
