@@ -14,36 +14,16 @@ class LayeredYAMLConfig
     # - otherwise keep going until A or B are true
     all_failed_once = false
     loop do
-      success = 0
-      failure = 0
+      counts = { s: 0, f: 0 }
       newcfg = @cfg.traverse do |v|
-        if v.is_a?(String) && v.match(/^<%=/)
-          begin
-            nv = Erubis::TinyEruby.new(v).evaluate(cfg: @cfg)
-            if !self.class.emptyok && nv.empty?
-              failure += 1
-              v
-            elsif !nv.match(/^<%=/)
-              success += 1
-              nv
-            else
-              failure += 1
-              v
-            end
-          rescue
-            failure += 1
-            v
-          end
-        else
-          v
-        end
+        resolve_one_pass(v, counts)
       end
       @cfg = newcfg
-      # all success
-      if 0 == failure
+      # all counts[:s]
+      if 0 == counts[:f]
         return
-      # all failure
-      elsif 0 == success
+      # all counts[:f]
+      elsif 0 == counts[:s]
         if all_failed_once
           fail 'all template evaluation failed'
         else
@@ -53,6 +33,35 @@ class LayeredYAMLConfig
       else
         all_failed_once = false
       end
+    end
+  end
+
+  private
+
+  def resolve_one_pass(v, counts)
+    if v.is_a?(String) && v.match(/^<%=/)
+      begin
+        resolve_one_value(v, counts)
+      rescue
+        counts[:f] += 1
+        v
+      end
+    else
+      v
+    end
+  end
+
+  def resolve_one_value(v, counts)
+    nv = Erubis::TinyEruby.new(v).evaluate(cfg: @cfg)
+    if !self.class.emptyok && nv.empty?
+      counts[:f] += 1
+      v
+    elsif !nv.match(/^<%=/)
+      counts[:s] += 1
+      nv
+    else
+      counts[:f] += 1
+      v
     end
   end
 end

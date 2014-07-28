@@ -1,7 +1,7 @@
 # based on Hash traverse from Ruby Facets (https://github.com/rubyworks/facets)
 class Array
   def traverse(&blk)
-    reduce([]) do |a, e|
+    each_with_object([]) do |e, a|
       case e
       when Hash
         e = e.traverse(&blk)
@@ -10,7 +10,6 @@ class Array
       end
       ne = blk.call(e)
       a.push ne
-      a
     end
   end
 end

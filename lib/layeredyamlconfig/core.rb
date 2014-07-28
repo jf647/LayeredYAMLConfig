@@ -69,11 +69,7 @@ class LayeredYAMLConfig
         fail ArgumentError, "file #{fn} does not exist"
       end
       begin
-        data = YAML.load(File.open(fn))
-        unless data.instance_of?(Hash)
-          fail ArgumentError, "file #{fn} does not contain a Hash"
-        end
-        @cfg.deep_merge!(data.deep_symbolize_keys).deep_symbolize_keys
+        merge_file(fn)
       rescue
         raise unless self.class.skipbad
       end
@@ -93,4 +89,14 @@ class LayeredYAMLConfig
   # create catalog of per-subclass instances and options
   clear_all
   reset_all
+
+  private
+
+  def merge_file(fn)
+    data = YAML.load(File.open(fn))
+    unless data.instance_of?(Hash)
+      fail ArgumentError, "file #{fn} does not contain a Hash"
+    end
+    @cfg.deep_merge!(data.deep_symbolize_keys).deep_symbolize_keys
+  end
 end
