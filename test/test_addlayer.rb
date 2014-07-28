@@ -1,22 +1,23 @@
 require 'minitest_helper'
-require 'minitest/autorun'
-require 'layeredyamlconfig'
 
+# dummy class for inheritance
 class OurConfig < LayeredYAMLConfig
 end
 
+# tests adding layers to an existing config
 class TestAddLayer < Minitest::Test
-    def setup
-        LayeredYAMLConfig.clear_all
-        LayeredYAMLConfig.reset_all
-    end
-    def test_add_layer
-        c = OurConfig.instance( 'test/ex7.yaml', 'test/ex8.yaml' )
-        assert_instance_of(OurConfig, c)
-        assert_equal('baz', c[:foo][:bar])
-        assert_equal('quux', c[:foo][:gzonk])
-        c.add( 'test/ex9.yaml' )
-        assert_instance_of(OurConfig, c)
-        assert_equal('wobble', c[:foo]['wibble'])
-    end
+  def setup
+    LayeredYAMLConfig.clear_all
+    LayeredYAMLConfig.reset_all
+  end
+
+  def test_add_layer
+    c = OurConfig.instance('test/ex7.yaml', 'test/ex8.yaml')
+    assert_instance_of(OurConfig, c)
+    assert_equal('baz', c[:foo][:bar])
+    assert_equal('quux', c[:foo][:gzonk])
+    c.add('test/ex9.yaml')
+    assert_instance_of(OurConfig, c)
+    assert_equal('wobble', c[:foo]['wibble'])
+  end
 end

@@ -9,13 +9,15 @@ gem "activesupport-core-ext", "~>4.0.0.2"
 gem "hash-deep-merge", "~>0.1.1"
 gem "erubis", "~>2.7.0"
 
-gem "rdoc", "~>4.0", :group => [:development, :test]
+gem "hoe-yard", ">=0.1.2", :group => [:development, :test]
 gem "hoe", "~>3.7.1", :group => [:development, :test]
 gem "hoe-gemspec", "~>1.0.0", :group => [:development, :test]
 gem "hoe-bundler", "~>1.2.0", :group => [:development, :test]
 gem "simplecov", "~>0.7.1", :group => [:development, :test]
-gem "simplecov-console", "~>0.1.1", :group => [:development, :test]
+gem "simplecov-rcov", "~>0.2.3", :group => [:development, :test]
 gem "minitest", "~>5.0.8", :group => [:development, :test]
-gem "minitest-debugger", "~>1.0.2", :group => [:development, :test]
+gem "minitest-reporters", "~>1.0.4", :group => [:development, :test]
+gem "rubocop", "~>0.24.1", :group => [:development, :test]
+gem "flog", "~>4.3.0", :group => [:development, :test]
 
 # vim: syntax=ruby

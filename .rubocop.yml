@@ -1,0 +1,8 @@
+Style/LineLength:
+  Max: 100
+
+Style/MethodLength:
+  Max: 20
+
+Style/ClassVars:
+  Enabled: false

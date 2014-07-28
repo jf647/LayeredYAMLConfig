@@ -1,0 +1,9 @@
+language: ruby
+env:
+  - CI_BUILD=1
+rvm:
+  - "ruby-1.9.3-p547"
+  - "ruby-2.0.0-p481"
+  - "ruby-2.1.2"
+  - jruby-1.7.11
+  - rbx-2.2.7
