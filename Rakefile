@@ -10,7 +10,6 @@ Hoe.plugins.delete :flog
 Hoe.spec 'layeredyamlconfig' do
   developer('James FitzGibbon', 'james@nadt.net')
   license 'MIT'
-  dependency 'psych', '~> 2.0.1'
   dependency 'activesupport-core-ext', '~> 4.0.0.2'
   dependency 'hash-deep-merge', '~> 0.1.1'
   dependency 'erubis', '~> 2.7.0'

@@ -4,7 +4,6 @@
 
 source "https://rubygems.org/"
 
-gem "psych", "~>2.0.1"
 gem "activesupport-core-ext", "~>4.0.0.2"
 gem "hash-deep-merge", "~>0.1.1"
 gem "erubis", "~>2.7.0"
